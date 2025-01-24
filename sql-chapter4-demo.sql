@@ -1,4 +1,5 @@
 -- Chapter 4 Demos
+USE AP;
 
 -- Vendors and Invoices tables
 
@@ -56,6 +57,52 @@ SELECT InvoiceNumber, InvoiceDate, InvoiceTotal, InvoiceLineItemAmount
 	JOIN InvoiceLineItems LI ON I.InvoiceID = LI.InvoiceID
 	AND I.InvoiceTotal > LI.InvoiceLineItemAmount
 ORDER BY InvoiceNumber;
+
+-- change 2nd condition to a WHERE clause
+SELECT InvoiceNumber, InvoiceDate, InvoiceTotal, InvoiceLineItemAmount
+	FROM Invoices I
+	JOIN InvoiceLineItems LI ON I.InvoiceID = LI.InvoiceID
+	WHERE I.InvoiceTotal > LI.InvoiceLineItemAmount
+ORDER BY InvoiceNumber;
+
+--p. 111 Vendors Table - self join
+-- vendors from cities in common with other vendors
+SELECT DISTINCT V1.VendorName, V1.VendorCity, V1.VendorState
+	FROM Vendors V1
+	JOIN Vendors V2 ON V1.VendorCity = V2.VendorCity
+		AND V1.VendorState = V2.VendorState
+		AND V1.VendorID <> V2.VendorID
+ORDER BY V1.VendorState, V1.VendorCity;
+
+-- p. 115 implicit join - vendors and invoices (vendors who have invoices)
+SELECT InvoiceNumber, VendorName
+	FROM Invoices I, Vendors V
+	WHERE V.VendorID = I.VendorID
+
+--doing some outter join stuffs
+-- which vendors have we invoiced? (done business with us)
+-- which vendors have we not done business with?
+-- which vendors have spent the most money with us?
+
+--  vendors and invoices - left outter join
+-- we want ALL data from Vendors AND Invoice Data if exists
+SELECT VendorName, InvoiceNumber, InvoiceTotal
+	FROM Vendors V
+	LEFT JOIN Invoices I ON V.VendorID = I.VendorID
+	ORDER BY VendorName;
+
+--Right Outter Join
+	SELECT VendorName, InvoiceNumber, InvoiceTotal
+	FROM Invoices I
+	RIGHT JOIN  Vendor V ON I.VendorID = V.VendorID
+	ORDER BY VendorName;
+
+-- vendors and invoices - left outter join where invoiceNumber
+	SELECT VendorName, InvoiceNumber, InvoiceTotal
+	FROM Vendors V
+	LEFT JOIN Invoices I ON V.VendorID = I.VendorID
+	WHERE InvoiceNumber IS NULL
+
 
 
 
