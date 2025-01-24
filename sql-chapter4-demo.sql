@@ -45,5 +45,17 @@ SELECT InvoiceNumber, VendorName, InvoiceDueDate, (InvoiceTotal - PaymentTotal -
 	WHERE (InvoiceTotal - PaymentTotal - CreditTotal) > 0
 ORDER BY InvoiceDueDate DESC;
 
+--p. 107 fully qualified object names
+SELECT *
+	FROM AP.dbo.Vendors;
+
+--p. 109 joining on multiple things
+-- join Invoices to InvoiceLineItems AND InvoiceTotal to InvoiceLineItemAmount
+SELECT InvoiceNumber, InvoiceDate, InvoiceTotal, InvoiceLineItemAmount
+	FROM Invoices I
+	JOIN InvoiceLineItems LI ON I.InvoiceID = LI.InvoiceID
+	AND I.InvoiceTotal > LI.InvoiceLineItemAmount
+ORDER BY InvoiceNumber;
+
 
 
