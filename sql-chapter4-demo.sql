@@ -23,3 +23,27 @@ SELECT InvoiceNumber, VendorName
 	FROM Invoices
 	JOIN Vendors on Vendors.VendorID = Invoices.VendorID;
 -- Easier to read than above (added specified SELECT)
+
+--p. 105 - aliases in joins w/ AS keyword
+SELECT InvoiceNumber, VendorName
+	FROM Invoices AS Inv
+	JOIN Vendors AS Ven on Ven.VendorID = Inv.VendorID;
+
+SELECT InvoiceNumber, VendorName
+	FROM Invoices AS I
+	JOIN Vendors AS V on V.VendorID = I.VendorID;
+
+--simplest form
+SELECT InvoiceNumber, VendorName
+	FROM Invoices I
+	JOIN Vendors V on V.VendorID = I.VendorID;
+
+-- add in a calculated column, where, order by
+SELECT InvoiceNumber, VendorName, InvoiceDueDate, (InvoiceTotal - PaymentTotal - CreditTotal) AS BalanceDue
+	FROM Invoices I
+	JOIN Vendors V on V.VendorID = I.VendorID
+	WHERE (InvoiceTotal - PaymentTotal - CreditTotal) > 0
+ORDER BY InvoiceDueDate DESC;
+
+
+
