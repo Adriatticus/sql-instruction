@@ -72,6 +72,14 @@ SELECT VendorName, InvoiceNumber, InvoiceDate, InvoiceTotal - (PaymentTotal + Cr
 SELECT VendorName Vendor, InvoiceDate 'Date', InvoiceNumber Number, InvoiceSequence #, InvoiceLineItemAmount LineItem
 	FROM Vendors V, Invoices I, InvoiceLineItems LI;
 
+--Exercise 6
+-- Write a SELECT statement that returns three columns:
+--VendorID from Vendors V tabl
+--VendorName from V table
+--Name - A concentration of VendorContactFName and VendorContactLName, with a space in between
+-- The result set should have one row for each vendor whose contact has the same first name as another vendor's contact
+-- ORDER BY Name
+
 
 
 
