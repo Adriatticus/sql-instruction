@@ -59,6 +59,17 @@ SELECT VendorName, InvoiceNumber, InvoiceDate, InvoiceTotal - (PaymentTotal + Cr
 	AND InvoiceTotal - (PaymentTotal + CreditTotal) <> 0
 	ORDER BY V.VendorName;
 
+-- Exercise 5
+-- Write a SELECT statement that returns five columns fromt 3 tables:
+-- All using the folling column aliases:
+--1 Vendor VendorName column
+--2 Date InvoiceDate column
+--3 Number InvoiceNumber column
+--4 # InvoiceSequence column
+--5 LineItem INvoiceLineItemAmount column
+--	Aliases V = Vendors table I = Invoices table LI = InvoiceLineItems table
+--	ORDER BY Vendor, Date, Number, and #
+
 
 
 
