@@ -76,10 +76,16 @@ SELECT VendorName Vendor, InvoiceDate 'Date', InvoiceNumber Number, InvoiceSeque
 -- Write a SELECT statement that returns three columns:
 --VendorID from Vendors V tabl
 --VendorName from V table
---Name - A concentration of VendorContactFName and VendorContactLName, with a space in between
+--Name - A concatination of VendorContactFName and VendorContactLName, with a space in between
 -- The result set should have one row for each vendor whose contact has the same first name as another vendor's contact
 -- ORDER BY Name
-
+-- Use a self-join
+SELECT V1.VendorID, V1.VendorName, V1.VendorContactFName + ' ' + V1.VendorContactLName 'Name'
+ FROM Vendors V1
+ JOIN Vendors V2 ON V1.VendorContactFName = V2.VendorContactFName
+ AND V1.VendorName <> V2.VendorName
+ORDER BY V1.VendorContactFName + ' ' + V1.VendorContactLName
+-- Why does <> function that way and with both VendorID AND VendorContactLName
 
 
 
