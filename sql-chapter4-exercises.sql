@@ -60,7 +60,7 @@ SELECT VendorName, InvoiceNumber, InvoiceDate, InvoiceTotal - (PaymentTotal + Cr
 	ORDER BY V.VendorName;
 
 -- Exercise 5
--- Write a SELECT statement that returns five columns fromt 3 tables:
+-- Write a SELECT statement that returns five columns from 3 tables:
 -- All using the folling column aliases:
 --1 Vendor VendorName column
 --2 Date InvoiceDate column
@@ -69,6 +69,8 @@ SELECT VendorName, InvoiceNumber, InvoiceDate, InvoiceTotal - (PaymentTotal + Cr
 --5 LineItem INvoiceLineItemAmount column
 --	Aliases V = Vendors table I = Invoices table LI = InvoiceLineItems table
 --	ORDER BY Vendor, Date, Number, and #
+SELECT VendorName Vendor, InvoiceDate 'Date', InvoiceNumber Number, InvoiceSequence #, InvoiceLineItemAmount LineItem
+	FROM Vendors V, Invoices I, InvoiceLineItems LI;
 
 
 
