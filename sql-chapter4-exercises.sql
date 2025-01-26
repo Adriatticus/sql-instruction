@@ -40,7 +40,7 @@ SELECT VendorName, DefaultAccountNo, AccountDescription
 	JOIN Vendors V ON V.DefaultAccountNo = GLA.AccountNo;
 --Sniff out what they have in common
 
---Exercise 4 exercise 2 but with implicit syntax
+--Exercise 4
 --Generate the same result set described in ex. 2, but use:
 --the implicit join syntax -p. 115
 -- Write a SELECT statement that returns four columns:
@@ -83,9 +83,25 @@ SELECT VendorName Vendor, InvoiceDate 'Date', InvoiceNumber Number, InvoiceSeque
 SELECT V1.VendorID, V1.VendorName, V1.VendorContactFName + ' ' + V1.VendorContactLName 'Name'
  FROM Vendors V1
  JOIN Vendors V2 ON V1.VendorContactFName = V2.VendorContactFName
- AND V1.VendorName <> V2.VendorName
-ORDER BY V1.VendorContactFName + ' ' + V1.VendorContactLName
--- Why does <> function that way and with both VendorID AND VendorContactLName
+ AND V1.VendorID <> V2.VendorID
+ORDER BY V1.VendorContactFName + ' ' + V1.VendorContactLName;
+-- Why does <> function that way and with both VendorID AND VendorContactLName AND VendorName
+
+--Exercise 7
+--Write a SELECT statement that returns two columns from the LGAccounts table:
+--AccountNo and AccountDescription
+--The result set should have one row for each account number that has never been used
+--ORDER BY AccountNO
+--use an outter join to the InvoiceLineItems table
+
+SELECT GLA.AccountNo, GLA.AccountDescription
+	FROM GLAccounts GLA LEFT JOIN InvoiceLineItems ILI
+	ON GLA.AccountNo = ILI.AccountNo
+	WHERE ILI.AccountNo IS NULL;
+
+
+
+
 
 
 
