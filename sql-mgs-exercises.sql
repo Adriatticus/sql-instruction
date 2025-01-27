@@ -120,3 +120,52 @@ SELECT P1.ProductName, P1.ListPrice, P1.ProductID
 	ON P1.ListPrice = P2.ListPrice
 	AND P1.ProductID <> P2.ProductID
 ORDER BY P1.ProductName;
+
+-- Exercise 6
+
+/* Write a SELECT statement that returns these two columns:
+CategoryName The CategoryName column from the Categories table
+ProductID The ProductID column from the Products table
+Return one row for each category that has never been used. (Hint: Use an outer join
+and only return rows where the ProductID column contains a null value.) */
+
+SELECT C.CategoryName, P.ProductID
+	FROM Categories C
+	LEFT JOIN Products P
+	ON C.CategoryID = P.CategoryID
+	WHERE P.ProductID IS NULL
+
+-- Exercise 7
+
+/*
+Use the UNION operator to generate a result set consisting of three columns from the
+Orders table:
+ShipStatus A calculated column that contains a value of
+SHIPPED or NOT SHIPPED
+OrderID The OrderID column
+OrderDate The OrderDate column
+If the order has a value in the ShipDate column, the ShipStatus column should
+contain a value of SHIPPED. Otherwise, it should contain a value of NOT SHIPPED.
+Sort the final result set by OrderDate.
+*/
+
+--Same result no union
+SELECT 
+	CASE 
+		WHEN (ShipDate IS NULL) 
+		THEN 'NOT SHIPPED' 
+		ELSE 'SHIPPED' 
+		END AS 'Ship Status',OrderID, OrderDate
+	FROM Orders O
+ORDER BY ShipDate;
+
+--Uninonized
+SELECT 'NOT SHIPPED' AS ShipStatus, OrderID, OrderDate
+	FROM Orders O
+	WHERE ShipDate IS NULL
+	UNION
+SELECT 'SHIPPED' AS Shipstatus, OrderID, OrderDate
+	FROM Orders
+	WHERE ShipDate IS NOT NULL
+
+	
