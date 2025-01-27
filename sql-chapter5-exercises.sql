@@ -39,4 +39,4 @@ Write a SELECT statement that returns three columns:VendorName, InvoiceCount, a
 	FROM Invoices I
 	JOIN Vendors V
 	ON V.VendorID = I.VendorID
-	GROUP BY VendorName	ORDER BY InvoiceCount DESC;SELECT *	FROM Invoices
+	GROUP BY VendorName	ORDER BY InvoiceCount DESC;SELECT *	FROM Invoices-- Exercise 4/*Write a SELECT statement that returns three columns:AccountDescription, LineItemCount, and LineItemSum.LineItemCount is the number of entries in 	the InvoiceLineItemstable that have that AccountNo.LineItemSum is the sum of the InvoiceLineItemAmount	column for that AccountNo.*/	SELECT AccountDescription, 	COUNT(InvoiceID) AS LineItemCount,	SUM(InvoiceLineItemAmount) AS LineItemSum	FROM GLAccounts GLA	JOIN InvoiceLineItems ILI	ON GLA.AccountNo = ILI.AccountNo	GROUP BY AccountDescription	HAVING COUNT(InvoiceID) > 1	ORDER BY LineItemCount DESC;/*Filter the result set to include only those rows with LineItemCount greater than 1. Group the result set by account description, and sort it by descending LineItemCount.Hint: Join the GLAccounts table to the InvoiceLineItems table*/--Exercise 5
