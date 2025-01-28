@@ -132,7 +132,7 @@ Hint: Use a four-table join
 
 SELECT GLA.AccountDescription,
  V.VendorName,
- COUNT('ROWS') AS LineItemCount, 
+ COUNT(*) AS LineItemCount, 
  SUM(InvoiceLineItemAmount) AS LineItemSum
 	FROM GLAccounts GLA
 	JOIN InvoiceLineItems ILI
@@ -141,7 +141,7 @@ SELECT GLA.AccountDescription,
 	ON  I.InvoiceID = ILI.InvoiceID
 	JOIN Vendors V
 	ON V.VendorID = I.VendorID
-	GROUP BY GROUPING SETS (V.VendorName, GLA.AccountDescription)
+	GROUP BY V.VendorName, GLA.AccountDescription
 	ORDER By V.VendorName, GLA.AccountDescription
 
 -- Exercise 8
@@ -170,7 +170,14 @@ SELECT COUNT(DISTINCT ILI.AccountNo) TotalAccounts,
 --Exercise 9
 
 /*
-Write a SELECT statement that returns six columns:VendorID From the Invoices table From the Invoices table From the Invoices tableInvoiceDate ^InvoiceTotal ^VendorTotal The sum of the invoice totals for each vendorVendorCount The count of invoices for each vendorVendorAvg The average of the invoice totals for each vendorThe result set should include the individual invoices for each vendor.
+Write a SELECT statement that returns six columns:
+VendorID From the Invoices table From the Invoices table From the Invoices table
+InvoiceDate ^
+InvoiceTotal ^
+VendorTotal The sum of the invoice totals for each vendor
+VendorCount The count of invoices for each vendor
+VendorAvg The average of the invoice totals for each vendor
+The result set should include the individual invoices for each vendor.
 */
 
 SELECT I.VendorID, I.InvoiceDate, I.InvoiceTotal,
