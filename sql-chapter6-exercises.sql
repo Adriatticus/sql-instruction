@@ -214,8 +214,6 @@ SELECT DISTINCT V2.VendorID
 	AND V3.VendorID <> V2.VEndorID
  ORDER BY V2.VendorID;
 
- ORDER BY VendorState, VendorCity
-
  --My Guitar Shop Exercise
 
 USE MyGuitarShop;
@@ -248,15 +246,23 @@ the largest order for that customer. To do this, you can group the result set by
 EmailAddress column
 */
 
-SELECT *
+SELECT EmailAddress, O.OrderID, SUM((ItemPrice - DiscountAmount) * Quantity) AS OrderTotal
 	FROM Orders O
 	JOIN Customers C
 	ON C.CustomerID = O.CustomerID
 	JOIN OrderItems OI
 	ON OI.OrderID = O.OrderID
-	
+ GROUP BY EmailAddress, O.OrderID
 
-
-
-
+ SELECT EmailAddress, MAX(OrderTotal) AS MaxSumOrderTotal
+	FROM 
+	(SELECT EmailAddress, O.OrderID, SUM((ItemPrice - DiscountAmount) * Quantity) AS OrderTotal
+	FROM Orders O
+	JOIN Customers C
+	ON C.CustomerID = O.CustomerID
+	JOIN OrderItems OI
+	ON OI.OrderID = O.OrderID
+  GROUP BY EmailAddress, O.OrderID) AS OrderTotals
+ GROUP BY EmailAddress;
+ 
 
