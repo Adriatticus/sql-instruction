@@ -171,7 +171,7 @@ SELECT VendorID, MAX(InvoiceTotal) as BD
 	WHERE (InvoiceTotal - PaymentTotal - CreditTotal) > 0
 	GROUP BY VendorID
 
-SELECT SUM(InvoiceMax) AS SumOfMaximums
+SELECT SUM(InvoiceMax) MAXAMAXIMUS
 FROM (SELECT VendorID, MAX(InvoiceTotal) AS InvoiceMax
       FROM Invoices
       WHERE InvoiceTotal - CreditTotal - PaymentTotal > 0
