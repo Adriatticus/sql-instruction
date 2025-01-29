@@ -29,3 +29,12 @@ UPDATE Movie
 
 DELETE Movie
 	WHERE ID = 3;
+
+SELECT *
+	FROM Movie
+
+-- copy the movie table into MovieCopy
+
+SELECT *
+	INTO MovieCopy
+	FROM Movie;

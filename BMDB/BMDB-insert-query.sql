@@ -56,4 +56,23 @@ Select Title, CONCAT(FirstName, ', ', LastName) AS Actor, Role
 	ON M.ID = C.MovieID
 	JOIN Actor A
 	ON A.ID = C.ActorID
+
+-- Inserting Sonic Movies ( All 3 )
+-- I might want to do my movie data base around video game movies. 
+--Lean into how generally awful movie adaptations of video games are.
+
+INSERT INTO Movie (Title, Year, Rating, Director)
+VALUES
+ ('Sonic the Hedgehog', 2020, 'PG', 'Jeff Fowler'),
+ ('Sonic the Hedgehog 2', 2022, 'PG', 'Jeff Fowler'),
+ ('Sonic the Hedgehog 3', 2024, 'PG', 'Jeff Fowler');
+
+ -- Insert Actors
+ /*
+ Ben Schwartz
+ Jim Carrey
+ James Marsden
+ Tika Sumpter
+
+ */
 	
