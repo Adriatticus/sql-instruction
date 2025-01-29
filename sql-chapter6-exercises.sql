@@ -177,4 +177,86 @@ FROM (SELECT VendorID, MAX(InvoiceTotal) AS InvoiceMax
       WHERE InvoiceTotal - CreditTotal - PaymentTotal > 0
       GROUP BY VendorID) AS MaxInvoice;
 
+--Exercise 7
+
+/*
+Write a SELECT statement that returns the 
+name, city, and state 
+of each vendor that’s located in a unique city and state.
+In other words, don’t include vendors that have a city and state
+in common with another vendor.
+*/
+
+SELECT VendorID, VendorName, VendorState, VendorCity
+	FROM Vendors
+ ORDER BY VendorState, VendorCity;
+
+ SELECT V1.VendorName, V1.VendorState, V1.VendorCity, V1.VendorID
+	FROM Vendors V1
+	WHERE V1.VendorID NOT IN
+	(SELECT DISTINCT V2.VendorID
+	FROM Vendors V2
+	JOIN Vendors V3
+	ON V3.VendorState = V2.VendorState
+	AND V3.VendorCity = V2.VendorCity
+	AND V3.VendorID <> V2.VEndorID)
+	ORDER BY VendorID
+
+--subquery - returning vendor ids for vendors who have same city/state combos
+-- Included: 68, 93, 96, 51, 52, 18
+-- Excluded: 20, 29, 64, 37
+
+SELECT DISTINCT V2.VendorID
+	FROM Vendors V2
+	JOIN Vendors V3
+	ON V3.VendorState = V2.VendorState
+	AND V3.VendorCity = V2.VendorCity
+	AND V3.VendorID <> V2.VEndorID
+ ORDER BY V2.VendorID;
+
+ ORDER BY VendorState, VendorCity
+
+ --My Guitar Shop Exercise
+
+USE MyGuitarShop;
+
+--Exercise 1
+
+ SELECT DISTINCT CategoryName
+	FROM Products P
+	JOIN Categories C
+	ON C.CategoryID = P.CategoryID;
+
+SELECT DISTINCT (CategoryName)
+	FROM Categories
+	WHERE CategoryID IN
+	(SELECT DISTINCT CategoryID
+	FROM Products);
+
+SELECT DISTINCT CategoryID
+	FROM Products;
+
+--Exercise 4
+/*
+A) Write a SELECT statement that returns three columns: EmailAddress, OrderID, and 
+the order total for each order. To do this, you can group the result set by the 
+EmailAddress and OrderID columns. Then, you can calculate the order total from the 
+columns in the OrderItems table.
+B) Write a second SELECT statement that uses the first SELECT statement in its FROM 
+clause. The main query should return two columns: the customer’s email address and 
+the largest order for that customer. To do this, you can group the result set by the 
+EmailAddress column
+*/
+
+SELECT *
+	FROM Orders O
+	JOIN Customers C
+	ON C.CustomerID = O.CustomerID
+	JOIN OrderItems OI
+	ON OI.OrderID = O.OrderID
+	
+
+
+
+
 
