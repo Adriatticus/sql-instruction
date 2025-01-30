@@ -69,10 +69,80 @@ VALUES
 
  -- Insert Actors
  /*
- Ben Schwartz
- Jim Carrey
+ Ben Schwartz - Sonic
+ Jim Carrey - Ivo Robotnik, Gerald Robotnik 
  James Marsden
  Tika Sumpter
+ Adam Pally
+ Lee Majdoub
+ Keanu Reeves - Shadow
+ Colleen O'Shaughnessey - Tails
+ Idris Elbs - Knuckles
+*/
 
- */
-	
+INSERT INTO Actor (FirstName, LastName, Gender, Birthdate)
+	VALUES
+ ('Ben', 'Schwartz', 'M', '1981-09-15'),
+ ('Jim', 'Carrey', 'M', '1962-01-17'),
+ ('James', 'Marsden', 'M', '1973-09-18'),
+ ('Tika', 'Sumpter', 'F', '1980-06-20'),
+ ('Adam', 'Pally', 'M', '1982-03-18'),
+ ('Lee', 'Majdoub', 'M', '1982-05-31'),
+ ('Keanu', 'Reeves', 'M', '1964-09-02'),
+ ('Colleen', 'O\''Shaughnessey', 'F', '1971-09-15'),
+ ('Idris', 'Elba', 'M', '1972-09-06')
+
+SELECT Title, FirstName, Role
+	FROM Movie M
+	JOIN Credit C
+	ON C.MovieID = M.ID
+	JOIN Actor A
+	ON C.ActorID = A.ID
+
+UPDATE Actor
+	SET LastName = 'O''Shaughnessey'
+ WHERE Actor.ID = 13;
+
+--Update Credit with Sonice (1,2,3) Actors
+SELECT *
+	FROM Actor;
+SELECT *
+	FROM Movie;
+SELECT *
+	FROM Credit;
+
+INSERT INTO Credit (MovieID, ActorID, Role)
+VALUES
+--SONIC 1
+ (3,6,'Sonic'),
+ (3,7,'Ivo Robotnik'),
+ (3,8,'Tom'),
+ (3,9,'Maddie'),
+ (3,10,'Wade'),
+ (3,11,'Agent Stone'),
+--SONIC 2 - Sonic1 Plus Tails and Knuckles
+ (4,6,'Sonic'),
+ (4,7,'Ivo Robotnik'),
+ (4,8,'Tom'),
+ (4,9,'Maddie'),
+ (4,10,'Wade'),
+ (4,11,'Agent Stone'),
+ (4,13,'Tails'),
+ (4,14,'Knuckles'),
+--SONIC 3 - Sonic2 Plus Shadow
+ (5,6,'Sonic'),
+ (5,7,'Ivo Robotnik, Gerald Robotnik'),
+ (5,8,'Tom'),
+ (5,9,'Maddie'),
+ (5,10,'Wade'),
+ (5,11,'Agent Stone'),
+ (5,13,'Tails'),
+ (5,14,'Knuckles'),
+ (5,12,'Shadow')
+
+
+ 
+
+
+
+
