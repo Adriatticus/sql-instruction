@@ -22,3 +22,5 @@ PhoneNumber		VARCHAR(12)		NOT NULL
 Email			VARCHAR(75)		NOT NULL
 Reviewer		BIT				NOT NULL
 [Admin]			BIT				NOT NULL
+
+--put your commas in ^^^
