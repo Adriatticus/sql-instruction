@@ -12,15 +12,68 @@ USE prsguild
 
 -- User Table
 
-CREATE TABLE User
-UserID			INT				IDENTITY(1,1) 
-Username		VARCHAR(20)		NOT NULL
-[Password]		VARCHAR(10)		NOT NULL
-FirstName		VARCHAR(20)		NOT NULL
-LastName		VARCHAR(20)		NOT NULL
-PhoneNumber		VARCHAR(12)		NOT NULL
-Email			VARCHAR(75)		NOT NULL
-Reviewer		BIT				NOT NULL
-[Admin]			BIT				NOT NULL
+CREATE TABLE [User](
+ID				INT				IDENTITY(1,1) PRIMARY KEY,
+Username		VARCHAR(20)		NOT NULL,
+[Password]		VARCHAR(10)		NOT NULL,
+FirstName		VARCHAR(20)		NOT NULL,
+LastName		VARCHAR(20)		NOT NULL,
+PhoneNumber		VARCHAR(12)		NOT NULL,
+Email			VARCHAR(75)		NOT NULL,
+CharacterName	VARCHAR(20)		NOT NULL,
+Class			VARCHAR(25)		NOT NULL,
+Title			VARCHAR(50)		NULL,
+Reviewer		BIT				NOT NULL,
+[Admin]			BIT				NOT NULL,
+CONSTRAINT uname UNIQUE (Username),
+CONSTRAINT charname UNIQUE (CharacterName)
+);
 
---put your commas in ^^^
+CREATE TABLE Vendor(
+ID				INT				IDENTITY(1,1) PRIMARY KEY,
+UserID			INT				NOT NULL,
+ShopCode		VARCHAR(5)		NOT NULL,
+Profession		VARCHAR(25)		NOT NULL,
+[Zone]			VARCHAR(50)		NOT NULL,
+Town			VARCHAR(25)		NOT NULL,
+CONSTRAINT scode UNIQUE (ShopCode),
+CONSTRAINT FK_UserVendor FOREIGN KEY (UserID) REFERENCES [User](ID)
+);
+
+CREATE TABLE [Product](
+ID				INT				IDENTITY(1,1) PRIMARY KEY,
+VendorID		INT				NOT NULL,
+PartNumber		VARCHAR(50)		NOT NULL,
+[Name]			VARCHAR(150)	NOT NULL,
+Price			DECIMAL(10,2)	NOT NULL,
+Stack			INT				NOT NULL,
+PhotoPath		VARCHAR(255)	NULL,
+CONSTRAINT vendorpart UNIQUE (VendorID, PartNumber),
+CONSTRAINT FK_ProductVendor FOREIGN KEY (VendorID) REFERENCES Vendor(ID),
+CONSTRAINT CK_stacksize CHECK (Stack >= 1 AND Stack <= 20)
+);
+
+CREATE TABLE Request(
+ID					INT				IDENTITY(1,1) PRIMARY KEY,
+UserID				INT				NOT NULL,
+RequestNumber		VARCHAR(20)		NOT NULL,
+[Description]		VARCHAR(100)	NOT NULL,
+Justification		VARCHAR(255)	NOT NULL,
+DateNeeded			DATE			NOT NULL,			
+DeliveryMode		VARCHAR(25)		NOT NULL,
+[Status]			VARCHAR(20)		DEFAULT 'NEW',	
+Total				DECIMAL(10,2)	DEFAULT 0.0,
+SubmittedDate		DATETIME		NOT NULL,
+ReasonForRejection	VARCHAR(100),
+CONSTRAINT FK_RequestUser FOREIGN KEY (UserID) REFERENCES [User](ID)
+);
+
+CREATE TABLE LineItem(
+ID				INT		IDENTITY(1,1) PRIMARY KEY,		
+RequestID		INT		NOT NULL,
+ProductID		INT		NOT NULL,
+Quantity		INT		NOT NULL,
+CONSTRAINT reqpdt UNIQUE (RequestID, ProductID),
+CONSTRAINT FK_LineReq FOREIGN KEY (RequestID) REFERENCES Request(ID),
+CONSTRAINT FK_LinePro FOREIGN KEY (ProductID) REFERENCES [Product](ID)
+);

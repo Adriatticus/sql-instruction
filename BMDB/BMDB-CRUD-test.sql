@@ -38,3 +38,14 @@ SELECT *
 SELECT *
 	INTO MovieCopy
 	FROM Movie;
+
+SELECT *
+	FROM MovieCopy;
+
+ALTER TABLE MovieCopy
+ALTER COLUMN Rating VARCHAR(5) NULL;
+
+INSERT
+	INTO MovieCopy (Title, Year, Director)
+	VALUES ('EZClapper$', 2026, 'Adrian, Travis')
+	
