@@ -7,7 +7,7 @@ USE prsquest;
 SELECT *
 	FROM User;
 
-INSERT INTO User (Username, Password, FirstName, LastName, PhoneNumber, Email, CharacterName, Class, Title, Reviewer, Admin)
+INSERT INTO User (Username, Password, FirstName, LastName, PhoneNumber, Email, CharacterName, Job, Title, Reviewer, Admin)
 VALUES
 	('Adrian', 'password', 'Adrian', 'Johnson', '318-900-1988', 'Adriatticus@prsguild.com', 'Adriatticus', 'Paladin', 'Guild Master', 0, 1),
 	('Travis', 'changeme', 'Travis', 'Boettjer', '909-900-1988', 'Travatticus@prsguild.com', 'Travatticus', 'Mageblade', 'The Patient', 1, 0);
