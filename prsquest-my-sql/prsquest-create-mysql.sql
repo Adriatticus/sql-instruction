@@ -14,7 +14,7 @@ LastName		VARCHAR(20)		NOT NULL,
 PhoneNumber		VARCHAR(12)		NOT NULL,
 Email			VARCHAR(75)		NOT NULL,
 CharacterName	VARCHAR(20)		NOT NULL,
-Class			VARCHAR(25)		NOT NULL,
+Job				VARCHAR(25)		NOT NULL,
 Title			VARCHAR(50)		NULL,
 Reviewer		BIT				NOT NULL,
 Admin			BIT				NOT NULL,
@@ -79,3 +79,8 @@ CONSTRAINT reqpdt UNIQUE (RequestID, ProductID),
 CONSTRAINT FK_LineReq FOREIGN KEY (RequestID) REFERENCES Request(ID),
 CONSTRAINT FK_LinePro FOREIGN KEY (ProductID) REFERENCES Product(ID)
 );
+
+-- create a user and grant privileges to that user
+DROP USER IF EXISTS prsquest_user@localhost;
+CREATE USER prsquest_user@localhost IDENTIFIED BY 'sesame';
+GRANT SELECT, INSERT, DELETE, UPDATE ON prsquest.* TO prsquest_user@localhost;
